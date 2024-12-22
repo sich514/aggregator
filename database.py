@@ -13,11 +13,14 @@ def init_db():
             staking_rate REAL NOT NULL
         )
     ''')
+    
     # Вставка данных
     cryptocurrencies = [
         ('Bitcoin (BTC)', 27000, 'Да', 'Binance, Coinbase', 6.5),
         ('Ethereum (ETH)', 1800, 'Да', 'Binance, Coinbase', 7.2),
         # Добавьте другие криптовалюты здесь
+        ('Solana (SOL)', 214.444, 'Да', 'Binance, Coinbase', 0.43),
+        ('XRP', 2.3597, 'Нет', 'Binance, Coinbase', 0.96)
     ]
     c.executemany('''
         INSERT INTO cryptocurrencies (name, price, futures, exchanges, staking_rate)
