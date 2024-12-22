@@ -14,6 +14,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            background-color: #1e1e1e;
         }
         th, td {
             padding: 10px;
@@ -21,12 +22,21 @@
         }
         th {
             background-color: #333333;
+            color: #ffffff;
         }
         tr:nth-child(even) {
             background-color: #3d3d3d;
         }
+        tr:nth-child(odd) {
+            background-color: #2b2b2b;
+        }
         .staking-rate {
             color: #00ff00;
+        }
+        .exchange-logos img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -56,7 +66,9 @@
                     <td>${crypto.name}</td>
                     <td>${crypto.price}</td>
                     <td>${crypto.futures}</td>
-                    <td>${crypto.exchanges}</td>
+                    <td class="exchange-logos">
+                        ${crypto.exchanges.split(',').map(exchange => `<img src="images/${exchange.trim().toLowerCase()}.png" alt="${exchange.trim()}">`).join('')}
+                    </td>
                     <td class="staking-rate">${crypto.staking_rate}%</td>
                 `;
                 table.appendChild(row);
