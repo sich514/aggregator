@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Криптовалютный Агрегатор</title>
+    <style>
+        body {
+            background-color: #2b2b2b;
+            color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #333333;
+        }
+        tr:nth-child(even) {
+            background-color: #3d3d3d;
+        }
+        .staking-rate {
+            color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <h1>Криптовалютный Агрегатор</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Криптовалюта</th>
+                <th>Цена (USD)</th>
+                <th>Фьючерсы</th>
+                <th>Биржи</th>
+                <th>Годовая ставка (%)</th>
+            </tr>
+        </thead>
+        <tbody id="crypto-table">
+        </tbody>
+    </table>
+    <script>
+        async function loadCryptocurrencies() {
+            const response = await fetch('/cryptocurrencies');
+            const cryptocurrencies = await response.json();
+            const table = document.getElementById('crypto-table');
+            cryptocurrencies.forEach(crypto => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${crypto.name}</td>
+                    <td>${crypto.price}</td>
+                    <td>${crypto.futures}</td>
+                    <td>${crypto.exchanges}</td>
+                    <td class="staking-rate">${crypto.staking_rate}%</td>
+                `;
+                table.appendChild(row);
+            });
+        }
+        loadCryptocurrencies();
+    </script>
+</body>
+</html>
