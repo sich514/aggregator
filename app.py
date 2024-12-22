@@ -15,17 +15,5 @@ def get_cryptocurrencies():
     conn.close()
     return jsonify([dict(row) for row in cryptocurrencies])
 
-@app.route('/cryptocurrencies', methods=['POST'])
-def add_cryptocurrency():
-    new_crypto = request.json
-    conn = get_db_connection()
-    conn.execute('''
-        INSERT INTO cryptocurrencies (name, price, futures, exchanges, staking_rate)
-        VALUES (?, ?, ?, ?, ?)
-    ''', (new_crypto['name'], new_crypto['price'], new_crypto['futures'], new_crypto['exchanges'], new_crypto['staking_rate']))
-    conn.commit()
-    conn.close()
-    return '', 201
-
 if __name__ == '__main__':
     app.run(debug=True)
